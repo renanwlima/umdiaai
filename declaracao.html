@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Jornada de Amor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        p { margin: 0; margin-bottom: 12px; }
+        body {
+            background-color: #fce4ec;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 40px 0;
+            place-items: center;
+        }
+
+        .slide-container {
+            align-items: center;
+            background-color: #fffaf1;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+            width: 1280px;
+            border: 1px solid #f8bbd0;
+        }
+
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(209, 77, 114, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            border-radius: 50%;
+        }
+
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(241, 195, 118, 0.15) 0%, transparent 70%);
+            z-index: 0;
+            border-radius: 50%;
+        }
+
+        .slide-container > * { position: relative; z-index: 1; }
+
+        .slide-container h1, .slide-container h2, .slide-container h3 {
+            color: #d14d72;
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+        }
+
+        .slide-container h1 { font-size: 80px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+        .slide-container .slide-title { font-size: 48px; font-weight: 700; margin-bottom: 40px; text-align: left; width: 100%; border-left: 6px solid #f1c376; padding-left: 20px; }
+        .slide-container h3 { font-size: 32px; margin-bottom: 15px; color: #880e4f; }
+        .slide-container p, .slide-container li, .slide-container td, .slide-container th { font-size: 20px; line-height: 1.6; color: #5d4037; font-weight: 400; }
+        .slide-container .subtitle { font-size: 24px; font-style: italic; color: #880e4f; text-align: center; max-width: 800px; }
+
+        .content-area { display: flex; flex-direction: column; justify-content: center; width: 100%; flex-grow: 1; }
+        .title-layout { text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+        .section-title-layout { text-align: center; }
+        .section-title-layout hr { border: none; height: 3px; background: #f1c376; width: 100px; margin: 30px auto; }
+        .section-title-layout h2 { font-size: 64px; }
+
+        .tiled-content { display: flex; gap: 40px; width: 100%; align-items: stretch; }
+        .tile { flex: 1; background: #ffffff; border-radius: 20px; padding: 40px; border: 1px solid #f1c376; text-align: center; }
+        .tile .icon { font-size: 50px; color: #d14d72; margin-bottom: 20px; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+        .image-wrapper { border-radius: 20px; overflow: hidden; height: 400px; border: 8px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .image-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+
+        .highlight-numbers-layout { display: flex; align-items: center; justify-content: space-around; width: 100%; text-align: center; gap: 20px; }
+        .number-box { flex: 1; background: #fff; padding: 30px 20px; border-radius: 20px; border: 1px solid #f8bbd0; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .number { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 700; color: #d14d72; line-height: 1; margin-bottom: 15px; }
+        .number-label { font-size: 18px; font-weight: 600; color: #880e4f; text-transform: uppercase; letter-spacing: 1px; }
+
+        .bullet-list ul { list-style: none; padding: 0; }
+        .bullet-list li { position: relative; padding-left: 50px; margin-bottom: 25px; font-size: 22px; }
+        .bullet-list i { position: absolute; left: 0; top: 5px; color: #f1c376; font-size: 28px; }
+
+        .quote-layout { width: 80%; margin: 0 auto; text-align: center; position: relative; }
+        .quote-layout blockquote { font-size: 38px; font-family: 'Playfair Display', serif; font-style: italic; color: #4e342e; line-height: 1.4; margin-bottom: 30px; }
+        .quote-layout blockquote::before { content: '“'; font-size: 120px; position: absolute; left: -60px; top: -40px; color: #f1c376; opacity: 0.5; }
+        .quote-layout cite { font-size: 24px; font-weight: 600; color: #d14d72; }
+
+        .chart-container { width: 100%; display: flex; flex-direction: column; gap: 30px; }
+        .bar { display: flex; align-items: center; gap: 20px; }
+        .bar .label { flex: 0 0 250px; text-align: right; font-weight: 600; }
+        .bar-inner { flex-grow: 1; background: #eceff1; height: 50px; border-radius: 25px; overflow: hidden; }
+        .bar-fill { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 20px; color: #fff; font-weight: 700; }
+
+        .timeline-layout { position: relative; display: flex; justify-content: space-between; width: 100%; margin-top: 50px; }
+        .timeline-line { position: absolute; top: 50%; left: 0; width: 100%; height: 4px; background: #f1c376; z-index: 0; transform: translateY(-2px); }
+        .timeline-item { position: relative; z-index: 1; width: 28%; text-align: center; }
+        .timeline-dot { width: 24px; height: 24px; background: #d14d72; border: 4px solid #fff; border-radius: 50%; margin: 0 auto 20px; }
+        .timeline-content { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #f1c376; }
+
+        .full-bg-image { background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; }
+        .overlay { background: rgba(255, 250, 241, 0.85); padding: 60px; border-radius: 20px; text-align: center; max-width: 800px; }
+
+        .qa-layout { text-align: center; }
+        .qa-layout h2 { font-size: 72px; margin-bottom: 20px; }
+
+        #formula-container { background: #fff; padding: 20px; border-radius: 12px; border: 1px dashed #d14d72; display: inline-block; margin-top: 20px; }
+
+        .btn-final {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 40px;
+            background-color: #d14d72;
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(209, 77, 114, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .btn-final:hover {
+            background-color: #880e4f;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <i class="fa-solid fa-heart-pulse" style="font-size: 50px; color: #d14d72; margin-bottom: 20px;"></i>
+        <h1>Nossa Jornada</h1>
+        <p class="subtitle">Uma pequena apresentação de tudo o que você significa para mim, antes de vermos nossas memórias favoritas.</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <hr>
+        <h2>O que eu sinto por você?</h2>
+        <p style="font-size: 24px; font-style: italic;">"O amor não é algo que se encontra, é algo que se constrói passo a passo."</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">3 Coisas que amo em você</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-face-smile-wink"></i></div>
+                <h3>Seu Sorriso</h3>
+                <p>Aquele que ilumina até os meus dias mais cinzentos e me faz esquecer qualquer problema num piscar de olhos.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-shield-heart"></i></div>
+                <h3>Seu Apoio</h3>
+                <p>Obrigado por ser meu porto seguro, por acreditar em mim quando nem eu mesmo acredito e por estar sempre lá.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-mug-hot"></i></div>
+                <h3>Nossa Paz</h3>
+                <p>A calmaria que você traz para a minha vida. Estar com você é sentir que estou exatamente onde deveria estar.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">A Nossa Conexão Única</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3>Mais que um sentimento</h3>
+                <p>Às vezes eu paro e fico te olhando, pensando em como tive sorte de te encontrar. Nossa sintonia é algo que eu nunca imaginei que existiria.</p>
+                <p>Cada conversa boba, cada piada que só a gente entende, e até os nossos silêncios confortáveis provam que fomos feitos um para o outro.</p>
+                <div id="formula-container">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                      <mi>N&#243;s</mi>
+                      <mo>=</mo>
+                      <mfenced>
+                        <mrow>
+                          <mi>Amizade</mi>
+                          <mo>&#215;</mo>
+                          <mi>Tempo</mi>
+                        </mrow>
+                      </mfenced>
+                      <mo>+</mo>
+                      <msup>
+                        <mi>Amor</mi>
+                        <mn>2</mn>
+                      </msup>
+                    </math>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="Fotos/Foto-01.jpg" alt="Mãos dadas romanticamente">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Nossa História em Números Brutos</h2>
+    <div class="content-area">
+        <div class="highlight-numbers-layout">
+            <div class="number-box">
+                <div class="number">1.374</div>
+                <div class="number-label">Dias desde o 1º Encontro<br><small>(07/09/2022)</small></div>
+            </div>
+            <div class="number-box">
+                <div class="number">1.308</div>
+                <div class="number-label">Dias de Namoro Oficial<br><small>(12/11/2022)</small></div>
+            </div>
+            <div class="number-box">
+                <div class="number">∞</div>
+                <div class="number-label">Minutos planejando<br>nosso futuro</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Como tudo começou (E se oficializou)</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>07 de Setembro de 2022</h3>
+                    <p><strong>A primeira vez que saímos.</strong> O começo despretensioso de um sentimento que mudaria nossas vidas para sempre.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>12 de Novembro de 2022</h3>
+                    <p><strong>O grande pedido!</strong> O dia em que você tomou a iniciativa e me escolheu oficialmente como seu namorado.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Hoje (Dia dos Namorados)</h3>
+                    <p>Mais de 3 anos colecionando memórias, risadas e a certeza de que aquele pedido foi a melhor coisa que nos aconteceu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Minhas Promessas para Nós</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-star"></i> <strong>Sempre te ouvir:</strong> Prometo estar presente para ouvir seus sonhos, medos e até suas reclamações do dia a dia.</li>
+                <li><i class="fa-solid fa-hand-holding-heart"></i> <strong>Cuidar de você:</strong> Estarei aqui com um abraço quente e seu sorriso favorito sempre que você precisar.</li>
+                <li><i class="fa-solid fa-compass"></i> <strong>Explorar o mundo:</strong> Quero carimbar meu passaporte da vida sempre ao seu lado, descobrindo novos lugares.</li>
+                <li><i class="fa-solid fa-infinity"></i> <strong>Te amar hoje e sempre:</strong> Escolher você todos os dias, com todas as suas qualidades e manias.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide8">
+    <div class="quote-layout">
+        <blockquote>"Eu te amo sem saber como, nem quando, nem de onde. Te amo diretamente sem problemas nem orgulho: assim te amo porque não sei amar de outra maneira."</blockquote>
+        <cite>— Pablo Neruda</cite>
+    </div>
+</div>
+
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">Impacto da sua presença na minha vida</h2>
+    <div class="content-area">
+        <div class="chart-container">
+            <div class="bar">
+                <div class="label">Felicidade antes de 07/09/2022</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 40%; background: #cfd8dc;">40%</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">Felicidade depois do seu "Sim"</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #d14d72, #f1c376);">100%++</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">Orgulho de ter você ao meu lado</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 100%; background: #f1c376;">Sem Limites</div></div>
+            </div>
+        </div>
+        <p style="margin-top: 30px; text-align: center; font-style: italic;">Os dados matemáticos não mentem: minha vida ficou infinitamente melhor desde que você entrou nela.</p>
+    </div>
+</div>
+
+<div class="slide-container full-bg-image" id="slide10" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('http://googleusercontent.com/image_collection/image_retrieval/11226458969516609089');">
+    <div class="overlay">
+        <h2 style="color: #d14d72; margin-bottom: 20px;">Tudo pronto?</h2>
+        <p style="font-size: 26px;">Agora que relembramos nossos números e datas mais importantes, que tal dar uma olhada no que esses mais de 1.300 dias renderam de fotos?</p>
+        <p style="font-style: italic;">Role para baixo para ver nossa galeria!</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide11">
+    <div class="qa-layout">
+        <i class="fa-solid fa-envelope-open-heart" style="font-size: 60px; color: #f1c376; margin-bottom: 20px;"></i>
+        <h2>Obrigado por aquele 12 de novembro!</h2>
+        <p class="subtitle">Eu te amo mais do que os dias corridos conseguem contar.</p>
+        <div style="margin-top: 50px; font-weight: 600; color: #d14d72;">
+            Seu Namorado <i class="fa-solid fa-heart"></i>
+        </div>
+        <a href="index.html#page-3" class="btn-final">Ver Surpresa Final 🎁</a>
+    </div>
+</div>
+
+</body>
+</html>
